@@ -20,6 +20,22 @@ public class Board {
         }
     }
 
+    public void addNumberOfBombsAround(){
+      for (int i = 0; i < board.length; i++){
+          board[i].setBombsAround(checkForBombsAround(i));
+      }
+    }
+
+    public int checkForBombsAround(int index){
+      if (board[index].isBomb()){
+          return 9;
+      }
+      int numberOfBombs = 0;
+      
+    }
+
+
+
     public String toString(){
       StringBuilder builder = new StringBuilder();
       builder.append("   ");
