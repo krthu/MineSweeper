@@ -1,4 +1,5 @@
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class Board {
   private Tile [] board;
@@ -31,7 +32,52 @@ public class Board {
           return 9;
       }
       int numberOfBombs = 0;
-      
+      ArrayList<Integer> indexOfTilesAround = getIndexOfSurroundingTiles(index);
+        for (int indexOfTile: indexOfTilesAround) {
+            if (board[indexOfTile].isBomb()){
+                numberOfBombs++;
+            }
+        }
+      return numberOfBombs;
+    }
+
+    public ArrayList<Integer> getIndexOfSurroundingTiles(int index){
+        ArrayList<Integer> indexOfSurroundingTiles = new ArrayList<>();
+        int row = index/width;
+        int column = index%width;
+
+        if (row > 0){
+            indexOfSurroundingTiles.add(index - width);
+        }
+
+        if (row < height -1 ){
+            indexOfSurroundingTiles.add(index + height);
+        }
+
+        if (column > 0){
+            indexOfSurroundingTiles.add(index - 1);
+        }
+
+        if (column < width -1){
+            indexOfSurroundingTiles.add(index + 1);
+        }
+
+        if (row > 0 && column > 0){
+            indexOfSurroundingTiles.add(index -width - 1);
+        }
+        if (row > 0 && column < width -1 ){
+            indexOfSurroundingTiles.add(index - width + 1);
+        }
+
+        if (row < height -1 && column > 0){
+            indexOfSurroundingTiles.add(index + width -1);
+        }
+
+        if (row < height -1 && column > width -1){
+            indexOfSurroundingTiles.add(index + width + 1);
+        }
+
+        return indexOfSurroundingTiles;
     }
 
 
@@ -74,9 +120,10 @@ public class Board {
     }
 
     public String getNumberOfBombsAsString(int numberOfBombs){
+
       switch (numberOfBombs){
           case 0 -> {return "|   ";}
-          case 9 -> { return "| B ";}
+          case 9 -> { return "| \u001B[31mB\u001B[0m ";}
           default -> {return "| "+ numberOfBombs + " ";}
       }
     }
