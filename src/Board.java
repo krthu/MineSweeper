@@ -33,7 +33,13 @@ public class Board {
       for (int i = 0; i < board.length; i++){
         if( i % width == 0){
             if(i != 0){
-                builder.append("\n");
+                builder.append("\n   ");
+                for (int j = 0; j < width; j++) {
+                    if (j == 0) {
+                        builder.append("-");
+                    }
+                    builder.append(j < width - 1 ? "---|" : "----");
+                }
             }
 
             char letterForColumn = (char) ('A' + i/width);
@@ -44,6 +50,7 @@ public class Board {
         builder.append(board[i].isOpen() ? board[i].getBombsAround() : "| X ");
         if (i % width == width -1 ){
             builder.append("|");
+
         }
       }
       builder.append("\n");
