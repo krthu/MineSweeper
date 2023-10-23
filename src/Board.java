@@ -60,7 +60,7 @@ public class Board {
     public String getNumberOfBombsAsString(int numberOfBombs){
       switch (numberOfBombs){
           case 0 -> {return "|   ";}
-          case 9 -> { return "|💣 ";}
+          case 9 -> { return "| B ";}
           default -> {return "| "+ numberOfBombs + " ";}
       }
     }
