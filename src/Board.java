@@ -24,9 +24,13 @@ public class Board {
       StringBuilder builder = new StringBuilder();
       builder.append("   ");
       for (int i = 0; i < width; i++){
-          builder.append("  ");
-          builder.append(i+1);
-          builder.append(" ");
+          String number = "";
+          if (i+1 < 10){
+              number = "  " + (i + 1) + " ";
+          }else {
+              number = " " + (i + 1) + " ";
+          }
+          builder.append(number);
       }
       builder.append("\n");
       builder.append(drawLine(width));
@@ -34,20 +38,15 @@ public class Board {
         if( i % width == 0){
             if(i != 0){
                 builder.append("\n   ");
-                for (int j = 0; j < width; j++) {
-                    if (j == 0) {
-                        builder.append("-");
-                    }
-                    builder.append(j < width - 1 ? "---|" : "----");
-                }
+                builder.append(drawDivider(width));
             }
 
             char letterForColumn = (char) ('A' + i/width);
             String changeRowAndAddLetter = "\n " +letterForColumn + " ";
             builder.append(changeRowAndAddLetter);
         }
-
-        builder.append(board[i].isOpen() ? board[i].getBombsAround() : "| X ");
+        String numberOfBombs = getNumberOfBombsAsString(board[i].getBombsAround());
+        builder.append(board[i].isOpen() ? numberOfBombs : "| X ");
         if (i % width == width -1 ){
             builder.append("|");
 
@@ -55,6 +54,26 @@ public class Board {
       }
       builder.append("\n");
       builder.append(drawLine(width));
+      return builder.toString();
+    }
+
+    public String getNumberOfBombsAsString(int numberOfBombs){
+      switch (numberOfBombs){
+          case 0 -> {return "|   ";}
+          case 9 -> { return "|💣 ";}
+          default -> {return "| "+ numberOfBombs + " ";}
+      }
+    }
+
+
+    public String drawDivider(int width){
+      StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < width; i++) {
+            if (i == 0) {
+                builder.append("-");
+            }
+            builder.append(i < width - 1 ? "---|" : "----");
+        }
       return builder.toString();
     }
 
