@@ -82,35 +82,36 @@ public class Board {
         ArrayList<Integer> indexOfSurroundingTiles = new ArrayList<>();
         int row = index / width;
         int column = index % width;
-
+        // Check if tile Above
         if (row > 0) {
             indexOfSurroundingTiles.add(index - width);
         }
-
+        // Check if tile below
         if (row < height -1 ){
             indexOfSurroundingTiles.add(index + width);
 
         }
-
+        // Check for tile left
         if (column > 0) {
             indexOfSurroundingTiles.add(index - 1);
         }
-
+        // Check for tile right
         if (column < width - 1) {
             indexOfSurroundingTiles.add(index + 1);
         }
-
+        // Check for tile Above left
         if (row > 0 && column > 0) {
             indexOfSurroundingTiles.add(index - width - 1);
         }
+        // Check for tile above right
         if (row > 0 && column < width - 1) {
             indexOfSurroundingTiles.add(index - width + 1);
         }
-
+        // Check for tile below left
         if (row < height - 1 && column > 0) {
             indexOfSurroundingTiles.add(index + width - 1);
         }
-
+        // Check for tile below right
         if (row < height -1 && column < width -1){
 
             indexOfSurroundingTiles.add(index + width + 1);
@@ -127,10 +128,23 @@ public class Board {
             return 0;
         }
         board[index].setOpen(true);
+        if(board[index].getBombsAround() == 0){
+            openTilesAround(index);
+        }
         return 1;
     }
 
-
+    public void openTilesAround(int index){
+       ArrayList<Integer> indexOfSurroundingTiles = getIndexOfSurroundingTiles(index);
+        for (int indexOfTileAround: indexOfSurroundingTiles) {
+            if(!board[indexOfTileAround].isOpen() && board[indexOfTileAround].getBombsAround() == 0){
+                board[indexOfTileAround].setOpen(true);
+                openTilesAround(indexOfTileAround);
+            } else if (!board[indexOfTileAround].isOpen()) {
+                board[indexOfTileAround].setOpen(true);
+            }
+        }
+    }
 
 
     public String toString() {
