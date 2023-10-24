@@ -105,12 +105,14 @@ public class Board {
         return indexOfSurroundingTiles;
     }
 
-    public int isOpen(int index){
+    public int openTile(int index){
         if (board[index].isBomb()){
+            board[index].setOpen(true);
             return -1;
         } else if (board[index].isOpen()) {
             return 0;
         }
+        board[index].setOpen(true);
         return 1;
     }
 
