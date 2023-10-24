@@ -16,7 +16,7 @@ public class Board {
         this.totalNumberOfBombs = numberOfBombs;
 
     }
-
+  
 
     public Board(int width, int height){
       this.width = width;
@@ -51,7 +51,7 @@ public class Board {
         }
         return numberOfBombs;
     }
-    
+
     public void fillBoard() {
         for (int i = 0; i < board.length; i++) {
             board[i] = new Tile();
