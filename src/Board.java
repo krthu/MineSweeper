@@ -127,10 +127,23 @@ public class Board {
             return 0;
         }
         board[index].setOpen(true);
+        if(board[index].getBombsAround() == 0){
+            openTilesAround(index);
+        }
         return 1;
     }
 
-
+    public void openTilesAround(int index){
+       ArrayList<Integer> indexOfSurroundingTiles = getIndexOfSurroundingTiles(index);
+        for (int indexOfTileAround: indexOfSurroundingTiles) {
+            if(!board[indexOfTileAround].isOpen() && board[indexOfTileAround].getBombsAround() == 0){
+                board[indexOfTileAround].setOpen(true);
+                openTilesAround(indexOfTileAround);
+            } else if (!board[indexOfTileAround].isOpen()) {
+                board[indexOfTileAround].setOpen(true);
+            }
+        }
+    }
 
 
     public String toString() {
