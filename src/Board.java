@@ -172,10 +172,9 @@ public class Board {
             }
         }
 
-      }
       builder.append("\n");
       builder.append(drawLine(width));
-      builder.append("Bombs; " + totalNumberOfBombs);
+      builder.append("\n   Bombs: " + totalNumberOfBombs);
       return builder.toString();
 
     }
