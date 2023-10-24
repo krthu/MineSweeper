@@ -4,11 +4,21 @@ public class MineSweeper {
 
     Scanner sc = new Scanner(System.in);
     private Board board;
+    private int boardHight;
+    private int boardWidth;
+
+    private int numberOfBombs;
 
     public MineSweeper(){
-        
+        boardHight = 5;
+        boardWidth = 10;
+        numberOfBombs = 5;
+    }
 
 
+    public void gameLoop(){
+        createBoard(boardWidth, boardHight, numberOfBombs);
+        System.out.println(board);
     }
 
     public int getUserInput(){
@@ -37,7 +47,10 @@ public class MineSweeper {
     }
 
     public void createBoard(int width, int height, int numberOfBombs){
-        board = new Board(width, height, numberOfBombs);
+        board = new Board(width, height);
+        board.fillBoard();
+        board.addBombs(numberOfBombs);
+        board.addNumberOfBombsAround();
     }
 
 
