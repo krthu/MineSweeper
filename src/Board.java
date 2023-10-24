@@ -11,6 +11,11 @@ public class Board {
 
 
 
+
+  private int totalNumberOfBombs;
+
+
+
     public Board(int width, int height){
       this.width = width;
       this.height = height;
@@ -23,10 +28,13 @@ public class Board {
         return width;
     }
 
+    public int getTotalNumberOfBombs() {return totalNumberOfBombs;}
+
     public int getHeight() {
         return height;
     }
     public int addBombs(int numberOfBombs){
+        totalNumberOfBombs=numberOfBombs;
         Random randomBomb = new Random();
         for (int i = 0; i < numberOfBombs ; i++) {
             int position = randomBomb.nextInt(board.length);
@@ -141,6 +149,7 @@ public class Board {
       }
       builder.append("\n");
       builder.append(drawLine(width));
+      builder.append("Bombs; " + totalNumberOfBombs);
       return builder.toString();
     }
 
