@@ -18,7 +18,31 @@ public class MineSweeper {
 
     public void gameLoop(){
         createBoard(boardWidth, boardHight, numberOfBombs);
+        boolean win = false;
+        boolean bomb = false;
+        while (!win && !bomb){
+            System.out.println(board);
+            int index = getUserInput();
+            switch (board.openTile(index)){
+                case -1 -> {
+                    bomb = true;
+                    System.out.println("You hit a Bomb!");
+                }
+                case 0 ->{
+                    System.out.println("Already open.");
+                }
+                case 1 ->{
+
+                }
+            }
+            // Check  win = board.win()
+        }
+        if (win){
+            System.out.println("Congratulations only bombs left!");
+        }
+
         System.out.println(board);
+
     }
 
     public int getUserInput(){
@@ -27,6 +51,9 @@ public class MineSweeper {
             System.out.println("Choose a cordinate (for example 'A1')");
             String userInput = sc.nextLine();
             index = getIndexFromCoordinate(board.getWidth(), board.getHeight(), userInput);
+            if (index == -1){
+                System.out.println("Invalid input!");
+            }
         }while (index == -1);
          return index;
     }
