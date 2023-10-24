@@ -1,8 +1,8 @@
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello MineSweeper");
-        MineSweeper game = new MineSweeper();
-        game.gameLoop();
+        MineSweeper mineSweeper = new MineSweeper();
+        mineSweeper.gameLoop();
 
     }
 }

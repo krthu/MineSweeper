@@ -4,25 +4,29 @@ public class MineSweeper {
 
     Scanner sc = new Scanner(System.in);
     private Board board;
-    private int boardHight;
+    private int boardHeight;
     private int boardWidth;
 
     private int numberOfBombs;
 
     public MineSweeper(){
-        boardHight = 5;
-        boardWidth = 10;
+
         numberOfBombs = 5;
     }
 
 
     public void gameLoop(){
-        createBoard(boardWidth, boardHight, numberOfBombs);
+        setSizeOfBoard();
+        createBoard(boardWidth, boardHeight, numberOfBombs);
         boolean win = false;
         boolean bomb = false;
         while (!win && !bomb){
             System.out.println(board);
             int index = getUserInput();
+             if (index == -1) {
+            System.out.println("Invalid input!");
+            continue;
+             }
             switch (board.openTile(index)){
                 case -1 -> {
                     bomb = true;
@@ -45,6 +49,17 @@ public class MineSweeper {
 
     }
 
+    public void setSizeOfBoard() {
+        System.out.println("Enter the width of the board:");
+        int width = sc.nextInt();
+        sc.nextLine();
+        System.out.println("Enter the height of the board:");
+        int height = sc.nextInt();
+        sc.nextLine();
+        boardWidth = width;
+        boardHeight = height;
+    }
+
     public int getUserInput(){
         int index = -1;
         do {
@@ -59,6 +74,9 @@ public class MineSweeper {
     }
 
     public int getIndexFromCoordinate(int width, int height, String coordinate){
+        if (coordinate == null || coordinate.isEmpty()) {
+            return -1;
+        }
         int row = coordinate.toUpperCase().charAt(0) - 'A';
         try{
             int column = Integer.parseInt((coordinate.substring(1)))-1;
