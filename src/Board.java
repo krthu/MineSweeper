@@ -76,7 +76,7 @@ public class Board {
         }
 
         if (row < height -1 ){
-            indexOfSurroundingTiles.add(index + height);
+            indexOfSurroundingTiles.add(index + width);
         }
 
         if (column > 0){
@@ -98,7 +98,7 @@ public class Board {
             indexOfSurroundingTiles.add(index + width -1);
         }
 
-        if (row < height -1 && column > width -1){
+        if (row < height -1 && column < width -1){
             indexOfSurroundingTiles.add(index + width + 1);
         }
 
