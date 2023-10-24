@@ -7,20 +7,15 @@ public class Board {
     private Tile[] board;
     private int width;
     private int height;
-    private int numberOfBombs;
+    private int totalNumberOfBombs;
 
     public Board(int width, int height, int numberOfBombs) {
         this.width = width;
         this.height = height;
         this.board = new Tile[width * height];
-        this.numberOfBombs = numberOfBombs;
+        this.totalNumberOfBombs = numberOfBombs;
 
     }
-
-
-
-  private int totalNumberOfBombs;
-
 
 
     public Board(int width, int height){
