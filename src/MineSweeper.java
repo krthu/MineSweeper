@@ -1,7 +1,8 @@
 public class MineSweeper {
-    private Board board;
+    Board board;
 
     public MineSweeper(){
+        
 
     }
 
@@ -19,6 +20,12 @@ public class MineSweeper {
             return -1;
         }
     }
+
+    public void createBoard(int width, int height, int numberOfBombs){
+        board = new Board(width, height, numberOfBombs);
+    }
+
+
 
 
 }
