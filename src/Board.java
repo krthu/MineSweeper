@@ -82,35 +82,36 @@ public class Board {
         ArrayList<Integer> indexOfSurroundingTiles = new ArrayList<>();
         int row = index / width;
         int column = index % width;
-
+        // Check if tile Above
         if (row > 0) {
             indexOfSurroundingTiles.add(index - width);
         }
-
+        // Check if tile below
         if (row < height -1 ){
             indexOfSurroundingTiles.add(index + width);
 
         }
-
+        // Check for tile left
         if (column > 0) {
             indexOfSurroundingTiles.add(index - 1);
         }
-
+        // Check for tile right
         if (column < width - 1) {
             indexOfSurroundingTiles.add(index + 1);
         }
-
+        // Check for tile Above left
         if (row > 0 && column > 0) {
             indexOfSurroundingTiles.add(index - width - 1);
         }
+        // Check for tile above right
         if (row > 0 && column < width - 1) {
             indexOfSurroundingTiles.add(index - width + 1);
         }
-
+        // Check for tile below left
         if (row < height - 1 && column > 0) {
             indexOfSurroundingTiles.add(index + width - 1);
         }
-
+        // Check for tile below right
         if (row < height -1 && column < width -1){
 
             indexOfSurroundingTiles.add(index + width + 1);
