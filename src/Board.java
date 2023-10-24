@@ -92,8 +92,9 @@ public class Board {
             indexOfSurroundingTiles.add(index - width);
         }
 
-        if (row < height - 1) {
-            indexOfSurroundingTiles.add(index + height);
+        if (row < height -1 ){
+            indexOfSurroundingTiles.add(index + width);
+
         }
 
         if (column > 0) {
@@ -115,12 +116,27 @@ public class Board {
             indexOfSurroundingTiles.add(index + width - 1);
         }
 
-        if (row < height - 1 && column > width - 1) {
+        if (row < height -1 && column < width -1){
+
             indexOfSurroundingTiles.add(index + width + 1);
         }
 
         return indexOfSurroundingTiles;
     }
+
+    public int openTile(int index){
+        if (board[index].isBomb()){
+            board[index].setOpen(true);
+            return -1;
+        } else if (board[index].isOpen()) {
+            return 0;
+        }
+        board[index].setOpen(true);
+        return 1;
+    }
+
+
+
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -131,6 +147,7 @@ public class Board {
                 number = "  " + (i + 1) + " ";
             } else {
                 number = " " + (i + 1) + " ";
+
             }
             builder.append(number);
         }
