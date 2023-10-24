@@ -16,7 +16,7 @@ public class Board {
         this.totalNumberOfBombs = numberOfBombs;
 
     }
- 
+  
 
     public Board(int width, int height){
       this.width = width;

@@ -12,10 +12,10 @@ public class MineSweeper {
     public MineSweeper(){
 
         numberOfBombs = 5;
-    }
+        }
 
 
-    public void gameLoop(){
+        public void gameLoop(){
         setSizeOfBoard();
         createBoard(boardWidth, boardHeight, numberOfBombs);
         boolean win = false;
@@ -26,7 +26,7 @@ public class MineSweeper {
              if (index == -1) {
             System.out.println("Invalid input!");
             continue;
-             }
+              }
             switch (board.openTile(index)){
                 case -1 -> {
                     bomb = true;
@@ -48,7 +48,7 @@ public class MineSweeper {
         System.out.println(board);
 
     }
-
+ 
     public void setSizeOfBoard() {
         System.out.println("Enter the width of the board:");
         int width = sc.nextInt();
