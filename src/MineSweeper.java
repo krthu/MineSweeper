@@ -1,8 +1,16 @@
+import java.util.Scanner;
+
 public class MineSweeper {
+    Scanner sc = new Scanner(System.in);
     private Board board;
-
-    public MineSweeper(){
-
+    public int getUserInput(){
+        int index = -1;
+        do {
+            System.out.println("Choose a cordinate (for example 'A1')");
+            String userInput = sc.nextLine();
+            index = getIndexFromCoordinate(board.getWidth(), board.getHeight(), userInput);
+        }while (index == -1);
+         return index;
     }
 
     public int getIndexFromCoordinate(int width, int height, String coordinate){
