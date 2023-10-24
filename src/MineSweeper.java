@@ -3,6 +3,11 @@ import java.util.Scanner;
 public class MineSweeper {
     Scanner sc = new Scanner(System.in);
     private Board board;
+    public MineSweeper(){
+
+
+    }
+
     public int getUserInput(){
         int index = -1;
         do {
