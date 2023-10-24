@@ -1,9 +1,12 @@
 import java.util.Scanner;
 
 public class MineSweeper {
+
     Scanner sc = new Scanner(System.in);
     private Board board;
+
     public MineSweeper(){
+        
 
 
     }
@@ -32,6 +35,12 @@ public class MineSweeper {
             return -1;
         }
     }
+
+    public void createBoard(int width, int height, int numberOfBombs){
+        board = new Board(width, height, numberOfBombs);
+    }
+
+
 
 
 }
