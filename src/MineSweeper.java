@@ -36,14 +36,14 @@ public class MineSweeper {
     }
 
     public MineSweeper(){
+        boardWidth = 7;
+        boardHeight = 7;
+        numberOfBombs = 5;
 
-        numberOfBombs = 1;
         }
 
 
         public void gameLoop(){
-        setSizeOfBoard();
-        setBombs();
         createBoard(boardWidth, boardHeight, numberOfBombs);
         boolean win = false;
         boolean bomb = false;
@@ -116,10 +116,10 @@ public class MineSweeper {
         }
     }
     public void setBombs(){
-        System.out.println("Enter how many bombs you want:");
-        int setBombs = sc.nextInt();
-        setNumberOfBombs(setBombs);
-        sc.nextLine();
+        int min = 1;
+        int max = boardHeight * boardWidth;
+            int setBombs = getSafeInt("Enter how many bombs you want:",min,max);
+            setNumberOfBombs(setBombs);
     }
 
     public int getUserInput(){
@@ -175,6 +175,27 @@ public class MineSweeper {
         System.out.println("Press Enter to go back");
         sc.nextLine();
     }
+    public void settings(){
+        String settingsMeny = "";
+        while (!settingsMeny.equals("3")){
+            System.out.println("""
+                    Settings
+                    1.Set size of board
+                    2.Set numbers of bombs
+                    3.Go back to menu
+                    """);
+            settingsMeny = sc.nextLine();
+            if (settingsMeny.equals("1")){
+                setSizeOfBoard();
+            }
+            if (settingsMeny.equals("2")){
+                setBombs();
+            }
+            if (settingsMeny.equals("3")) {
+            }
+        }
+
+    }
 
 
     public int getSafeInt(String question, int min, int max){
@@ -186,7 +207,7 @@ public class MineSweeper {
                 if (input >= min && input <= max){
                     return input;
                 }else {
-                    System.out.println("Has du be between " + min + "-" + max);
+                    System.out.println("Has to be between " + min + "-" + max);
                 }
 
             }catch (Exception e){
