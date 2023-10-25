@@ -6,8 +6,18 @@ public class MineSweeper {
     private Board board;
     private int boardHeight;
     private int boardWidth;
+    private int win;
+    private int gamesPlayed;
 
     private int numberOfBombs;
+
+    public int getWin() {
+        return win;
+    }
+
+    public int getGamesPlayed() {
+        return gamesPlayed;
+    }
 
     public MineSweeper(){
 
@@ -43,9 +53,11 @@ public class MineSweeper {
         }
         if (win){
             System.out.println("Congratulations only bombs left!");
+            addwin();
         }
 
         System.out.println(board);
+        gamesPlayed();
 
     }
  
@@ -96,6 +108,18 @@ public class MineSweeper {
         board.fillBoard();
         board.addBombs(numberOfBombs);
         board.addNumberOfBombsAround();
+    }
+    public void addwin(){
+        this.win++;
+    }
+    public void gamesPlayed(){
+        this.gamesPlayed++;
+    }
+    public void stats(){
+        System.out.println("Wins: " + getWin());
+        System.out.println("Games played: " + getGamesPlayed());
+        System.out.println("Press Enter to go back");
+        sc.nextLine();
     }
 
 
