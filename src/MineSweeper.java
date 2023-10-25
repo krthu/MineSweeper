@@ -24,6 +24,10 @@ public class MineSweeper {
         return gamesPlayed;
     }
 
+    public void setNumberOfBombs(int numberOfBombs) {
+        this.numberOfBombs = numberOfBombs;
+    }
+
     public MineSweeper(){
 
         numberOfBombs = 5;
@@ -32,6 +36,7 @@ public class MineSweeper {
 
         public void gameLoop(){
         setSizeOfBoard();
+        setBombs();
         createBoard(boardWidth, boardHeight, numberOfBombs);
         boolean win = false;
         boolean bomb = false;
@@ -78,6 +83,12 @@ public class MineSweeper {
             System.out.println("The board has " + (width*height) + " tiles.");
             System.out.println("The number of bombs is set at " + numberOfBombs +". Pick a bigger board.");
         }
+    }
+    public void setBombs(){
+        System.out.println("Enter how many bombs you want:");
+        int setBombs = sc.nextInt();
+        setNumberOfBombs(setBombs);
+        sc.nextLine();
     }
 
     public int getUserInput(){
