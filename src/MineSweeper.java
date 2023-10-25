@@ -64,7 +64,7 @@ public class MineSweeper {
                     switch (board.openTile(index)){
                         case -1 -> {
                             bomb = true;
-                            System.out.println("You hit a Bomb!");
+
                         }
                         case 0 ->{
                             System.out.println("Already open.");
@@ -86,6 +86,8 @@ public class MineSweeper {
         if (win){
             System.out.println("\u001B[32mCongratulations only bombs left!\u001B[0m");            
             addwin();
+        } else {
+            System.out.println("You hit a Bomb!");
         }
         gamesPlayed();
 
