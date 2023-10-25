@@ -1,5 +1,6 @@
 public class Tile {
     private boolean isBomb;
+    private boolean revealed;
     private boolean isOpen;
 
     private int bombsAround;
@@ -33,9 +34,21 @@ public class Tile {
         this.bombsAround = bombsAround;
     }
 
+    public boolean isRevealed() {
+        return revealed;
+    }
+
+    public void setRevealed(boolean revealed) {
+        this.revealed = revealed;
+    }
+
     @Override
     public String toString(){
         return "isBomb: " + isBomb + " isOpen " + isOpen + " bombsAround " + bombsAround;
     }
 
 }
+
+
+
+
