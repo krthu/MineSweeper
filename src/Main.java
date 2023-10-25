@@ -5,20 +5,24 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         MineSweeper game = new MineSweeper();
         String meny = "";
-        while (!meny.equals("3")){
+        while (!meny.equals("4")){
             System.out.println("""
                     1.play Mine Sweeper
-                    2.Show Stats
-                    3.Quit
+                    2.Settings
+                    3.Show Stats
+                    4.Quit
                     """);
             meny = sc.nextLine();
             if (meny.equals("1")){
                 game.gameLoop();
             }
             if (meny.equals("2")){
-                game.stats();
+                game.settings();
             }
             if (meny.equals("3")){
+                game.stats();
+            }
+            if (meny.equals("4")){
                 System.out.println("Game Ended");
             }
         }
