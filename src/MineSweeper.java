@@ -11,7 +11,7 @@ public class MineSweeper {
 
     public MineSweeper(){
 
-        numberOfBombs = 5;
+        numberOfBombs = 1;
         }
 
 
@@ -39,13 +39,14 @@ public class MineSweeper {
 
                 }
             }
-            // Check  win = board.win()
+            win=board.checkWinConditions();
         }
+        System.out.println(board);
         if (win){
-            System.out.println("Congratulations only bombs left!");
+            System.out.println("\u001B[32mCongratulations only bombs left!\u001B[0m");
         }
 
-        System.out.println(board);
+        //System.out.println(board);
 
     }
  

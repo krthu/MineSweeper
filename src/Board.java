@@ -78,7 +78,7 @@ public class Board {
     }
     public boolean checkWinConditions() {
         for (int i = 0; i < board.length; i++) {
-            if (!board[i].isBomb() && !board[i].isRevealed()) {
+            if (!board[i].isBomb() && !board[i].isOpen()) {
                 return false;
             }
         }
