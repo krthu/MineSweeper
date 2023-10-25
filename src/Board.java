@@ -155,6 +155,18 @@ public class Board {
         }
     }
 
+    public boolean toggleFlag(int index){
+        if (board[index].isOpen()){
+            return false;
+        }
+        board[index].toggleFlag();
+        return true;
+    }
+
+    public boolean isTileFlagged(int index){
+        return board[index].isFlagged();
+    }
+
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -183,7 +195,8 @@ public class Board {
                 builder.append(changeRowAndAddLetter);
             }
             String numberOfBombs = getNumberOfBombsAsString(board[i].getBombsAround());
-            builder.append(board[i].isOpen() ? numberOfBombs : "| X ");
+            String tileHiddenOrFlagged = board[i].isFlagged() ? "| F ": "| X ";
+            builder.append(board[i].isOpen() ? numberOfBombs : tileHiddenOrFlagged);
             if (i % width == width - 1) {
                 builder.append("|");
 
