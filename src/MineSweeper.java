@@ -63,6 +63,8 @@ public class MineSweeper {
                 boardHeight = height;
                 return;
             }
+            System.out.println("The board has " + (width*height) + " tiles.");
+            System.out.println("The number of bombs is set at " + numberOfBombs +". Pick a bigger board.");
         }
     }
 
