@@ -1,5 +1,6 @@
 public class Tile {
     private boolean isBomb;
+
     private boolean isOpen;
 
     private boolean isFlagged;
@@ -50,3 +51,7 @@ public class Tile {
     }
 
 }
+
+
+
+

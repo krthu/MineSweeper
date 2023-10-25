@@ -64,13 +64,13 @@ public class MineSweeper {
                     switch (board.openTile(index)){
                         case -1 -> {
                             bomb = true;
-                            System.out.println("You hit a Bomb!");
+
                         }
                         case 0 ->{
                             System.out.println("Already open.");
                         }
                         case 1 ->{
-
+                            
                         }
                     }
                 }
@@ -79,17 +79,20 @@ public class MineSweeper {
                      System.out.println("Already open.");
                  }
              }
-            // Check  win = board.win()
-        }
-        if (win){
-            System.out.println("Congratulations only bombs left!");
-            addwin();
-        }
+             win=board.checkWinConditions();
 
+        }
         System.out.println(board);
+        if (win){
+            System.out.println("\u001B[32mCongratulations only bombs left!\u001B[0m");            
+            addwin();
+        } else {
+            System.out.println("You hit a Bomb!");
+        }
         gamesPlayed();
 
-    }
+
+      }
 
     public void toggleMode(){
         if (inputMode == Mode.FLAG){

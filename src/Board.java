@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -77,6 +76,16 @@ public class Board {
         }
         return numberOfBombs;
     }
+    public boolean checkWinConditions() {
+        for (int i = 0; i < board.length; i++) {
+            if (!board[i].isBomb() && !board[i].isOpen()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 
     public ArrayList<Integer> getIndexOfSurroundingTiles(int index) {
         ArrayList<Integer> indexOfSurroundingTiles = new ArrayList<>();
@@ -160,6 +169,9 @@ public class Board {
 
 
     public String toString() {
+        final String CYAN = "\u001B[36m";
+        final String RESET = "\u001B[0m";
+
         StringBuilder builder = new StringBuilder();
         builder.append("   ");
         for (int i = 0; i < width; i++) {
@@ -186,7 +198,7 @@ public class Board {
                 builder.append(changeRowAndAddLetter);
             }
             String numberOfBombs = getNumberOfBombsAsString(board[i].getBombsAround());
-            String tileHiddenOrFlagged = board[i].isFlagged() ? "| F ": "| X ";
+            String tileHiddenOrFlagged = board[i].isFlagged() ? "| "+ CYAN + "F" + RESET +" ": "| X ";
             builder.append(board[i].isOpen() ? numberOfBombs : tileHiddenOrFlagged);
             if (i % width == width - 1) {
                 builder.append("|");
@@ -202,18 +214,39 @@ public class Board {
     }
 
     public String getNumberOfBombsAsString(int numberOfBombs) {
+        final String RED = "\u001B[31m";
+        final String RESET = "\u001B[0m";
+        final String GREEN = "\u001B[32m";
+        final String YELLOW = "\u001B[33m";
+        final String BLUE = "\u001B[34m";
+        final String PURPLE = "\u001B[35m";
+        final String CYAN = "\u001B[36m";
+
 
         switch (numberOfBombs) {
-            case 0 -> {
+            case 0:
                 return "|   ";
-            }
-            case 9 -> {
-                return "| \u001B[31mB\u001B[0m ";
-            }
-            default -> {
-                return "| " + numberOfBombs + " ";
-            }
+
+            case 1:
+                return "| "+ GREEN + numberOfBombs +RESET +" ";
+
+            case 2:
+                return "| "+ YELLOW + numberOfBombs +RESET +" ";
+
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+
+                return "| "+ RED + numberOfBombs +RESET +" ";
+
+            case 9:
+                return "| "+ RED +"B" +RESET +" ";
+
         }
+        return "";
     }
 
     public String drawDivider(int width) {
