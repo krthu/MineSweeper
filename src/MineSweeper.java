@@ -15,6 +15,13 @@ public class MineSweeper {
     private final int MAX_BOARD_WIDTH = 26;
     private final int MIN_BOARD_HEIGHT = 5;
     private final int MAX_BOARD_HEIGHT = 26;
+
+    private Mode inputMode = Mode.OPEN;
+
+    private enum Mode{
+        OPEN,
+        FLAG
+    }
   
     public int getWin() {
         return win;
@@ -39,21 +46,34 @@ public class MineSweeper {
             System.out.println(board);
             int index = getUserInput();
              if (index == -1) {
-            System.out.println("Invalid input!");
-            continue;
-              }
-            switch (board.openTile(index)){
-                case -1 -> {
-                    bomb = true;
-                    System.out.println("You hit a Bomb!");
-                }
-                case 0 ->{
-                    System.out.println("Already open.");
-                }
-                case 1 ->{
+                System.out.println("Invalid input!");
+                continue;
+              } else if (index == -2) {
+                 toggleMode();
+                 continue;
+             }
+             if (inputMode == Mode.OPEN){
+                 if (board.isTileFlagged(index)){
+                     System.out.println("Tile is flagged! Remove flag to open.");
+                 }else{
+                    switch (board.openTile(index)){
+                        case -1 -> {
+                            bomb = true;
+                            System.out.println("You hit a Bomb!");
+                        }
+                        case 0 ->{
+                            System.out.println("Already open.");
+                        }
+                        case 1 ->{
 
+                        }
+                    }
                 }
-            }
+             }else {
+                 if (!board.toggleFlag(index)){
+                     System.out.println("Already open.");
+                 }
+             }
             // Check  win = board.win()
         }
         if (win){
@@ -64,6 +84,14 @@ public class MineSweeper {
         System.out.println(board);
         gamesPlayed();
 
+    }
+
+    public void toggleMode(){
+        if (inputMode == Mode.FLAG){
+            inputMode = Mode.OPEN;
+        } else {
+            inputMode = Mode.FLAG;
+        }
     }
  
     public void setSizeOfBoard() {
@@ -83,8 +111,12 @@ public class MineSweeper {
     public int getUserInput(){
         int index = -1;
         do {
-            System.out.println("Choose a cordinate (for example 'A1')");
+            System.out.println("Choose a coordinate to " + inputMode +" (for example 'A1')");
             String userInput = sc.nextLine();
+            if (userInput.trim().equalsIgnoreCase("mode"))
+            {
+                return -2;
+            }
             index = getIndexFromCoordinate(board.getWidth(), board.getHeight(), userInput);
             if (index == -1){
                 System.out.println("Invalid input!");
@@ -129,6 +161,7 @@ public class MineSweeper {
         System.out.println("Press Enter to go back");
         sc.nextLine();
     }
+
 
     public int getSafeInt(String question, int min, int max){
         while (true){

@@ -2,10 +2,13 @@ public class Tile {
     private boolean isBomb;
     private boolean isOpen;
 
+    private boolean isFlagged;
+
     private int bombsAround;
 
     public Tile(){
         this.isOpen = false;
+        this.isFlagged = false;
         this.bombsAround = 0;
     }
 
@@ -29,11 +32,19 @@ public class Tile {
         return bombsAround;
     }
 
+    public boolean isFlagged() {
+        return isFlagged;
+    }
+
     public void setBombsAround(int bombsAround) {
         this.bombsAround = bombsAround;
     }
 
-    @Override
+    public void toggleFlag(){
+        isFlagged = !isFlagged;
+    }
+
+
     public String toString(){
         return "isBomb: " + isBomb + " isOpen " + isOpen + " bombsAround " + bombsAround;
     }
