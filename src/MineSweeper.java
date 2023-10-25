@@ -11,6 +11,11 @@ public class MineSweeper {
 
     private int numberOfBombs;
 
+    private final int MIN_BOARD_WIDTH = 5;
+    private final int MAX_BOARD_WIDTH = 26;
+    private final int MIN_BOARD_HEIGHT = 5;
+    private final int MAX_BOARD_HEIGHT = 26;
+  
     public int getWin() {
         return win;
     }
@@ -62,14 +67,17 @@ public class MineSweeper {
     }
  
     public void setSizeOfBoard() {
-        System.out.println("Enter the width of the board:");
-        int width = sc.nextInt();
-        sc.nextLine();
-        System.out.println("Enter the height of the board:");
-        int height = sc.nextInt();
-        sc.nextLine();
-        boardWidth = width;
-        boardHeight = height;
+        while (true){
+            int width = getSafeInt("Enter the width of the board:", MIN_BOARD_WIDTH, MAX_BOARD_WIDTH);
+            int height = getSafeInt("Enter the height of the board:", MIN_BOARD_HEIGHT, MAX_BOARD_HEIGHT );
+            if (width*height > numberOfBombs){
+                boardWidth = width;
+                boardHeight = height;
+                return;
+            }
+            System.out.println("The board has " + (width*height) + " tiles.");
+            System.out.println("The number of bombs is set at " + numberOfBombs +". Pick a bigger board.");
+        }
     }
 
     public int getUserInput(){
@@ -120,6 +128,27 @@ public class MineSweeper {
         System.out.println("Games played: " + getGamesPlayed());
         System.out.println("Press Enter to go back");
         sc.nextLine();
+    }
+
+    public int getSafeInt(String question, int min, int max){
+        while (true){
+            System.out.println(question);
+            try {
+                int input = sc.nextInt();
+                sc.nextLine();
+                if (input >= min && input <= max){
+                    return input;
+                }else {
+                    System.out.println("Has du be between " + min + "-" + max);
+                }
+
+            }catch (Exception e){
+                System.out.println("Invalid input.");
+                sc.nextLine();
+            }
+        }
+
+
     }
 
 
