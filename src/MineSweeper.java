@@ -53,16 +53,20 @@ public class MineSweeper {
                  continue;
              }
              if (inputMode == Mode.OPEN){
-                switch (board.openTile(index)){
-                    case -1 -> {
-                        bomb = true;
-                        System.out.println("You hit a Bomb!");
-                    }
-                    case 0 ->{
-                        System.out.println("Already open.");
-                    }
-                    case 1 ->{
+                 if (board.isTileFlagged(index)){
+                     System.out.println("Tile is flagged! Remove flag to open.");
+                 }else{
+                    switch (board.openTile(index)){
+                        case -1 -> {
+                            bomb = true;
+                            System.out.println("You hit a Bomb!");
+                        }
+                        case 0 ->{
+                            System.out.println("Already open.");
+                        }
+                        case 1 ->{
 
+                        }
                     }
                 }
              }else {

@@ -154,6 +154,10 @@ public class Board {
         return true;
     }
 
+    public boolean isTileFlagged(int index){
+        return board[index].isFlagged();
+    }
+
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
