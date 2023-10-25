@@ -37,7 +37,7 @@ public class MineSweeper {
 
     public MineSweeper(){
 
-        numberOfBombs = 5;
+        numberOfBombs = 1;
         }
 
 
@@ -70,7 +70,7 @@ public class MineSweeper {
                             System.out.println("Already open.");
                         }
                         case 1 ->{
-
+                            
                         }
                     }
                 }
@@ -79,17 +79,18 @@ public class MineSweeper {
                      System.out.println("Already open.");
                  }
              }
-            // Check  win = board.win()
+             win=board.checkWinConditions();
+
         }
+        System.out.println(board);
         if (win){
-            System.out.println("Congratulations only bombs left!");
+            System.out.println("\u001B[32mCongratulations only bombs left!\u001B[0m");            
             addwin();
         }
-
-        System.out.println(board);
         gamesPlayed();
 
-    }
+
+      }
 
     public void toggleMode(){
         if (inputMode == Mode.FLAG){

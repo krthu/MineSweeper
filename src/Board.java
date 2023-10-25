@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -77,6 +76,16 @@ public class Board {
         }
         return numberOfBombs;
     }
+    public boolean checkWinConditions() {
+        for (int i = 0; i < board.length; i++) {
+            if (!board[i].isBomb() && !board[i].isOpen()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 
     public ArrayList<Integer> getIndexOfSurroundingTiles(int index) {
         ArrayList<Integer> indexOfSurroundingTiles = new ArrayList<>();
