@@ -65,6 +65,8 @@ public class MineSweeper {
                         case -1 -> {
                             bomb = true;
 
+                            board.revealAllBombs();
+
                         }
                         case 0 ->{
                             System.out.println("Already open.");

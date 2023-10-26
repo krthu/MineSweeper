@@ -85,6 +85,13 @@ public class Board {
         return true;
     }
 
+    public void revealAllBombs() {
+        for (int i = 0; i < board.length; i++) {
+            if (board[i].isBomb()) {
+                board[i].setOpen(true);
+            }
+        }
+    }
 
 
     public ArrayList<Integer> getIndexOfSurroundingTiles(int index) {
