@@ -228,6 +228,7 @@ public class Board {
         final String BLUE = "\u001B[34m";
         final String PURPLE = "\u001B[35m";
         final String CYAN = "\u001B[36m";
+        final String BLACK = "\u001B[30m";
 
 
         switch (numberOfBombs) {
@@ -250,10 +251,14 @@ public class Board {
                 return "| "+ RED + numberOfBombs +RESET +" ";
 
             case "9":
-                return "| " + "B" +" ";
+                return "| " + BLACK + "B" + RESET + " ";
+            case (RED + "B" + RESET):
+                return "| " + numberOfBombs +" ";
+
 
         }
         return "";
+
     }
 
     public String drawDivider(int width) {
