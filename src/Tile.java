@@ -5,12 +5,12 @@ public class Tile {
 
     private boolean isFlagged;
 
-    private int bombsAround;
+    private String bombsAround;
 
     public Tile(){
         this.isOpen = false;
         this.isFlagged = false;
-        this.bombsAround = 0;
+        this.bombsAround = "0";
     }
 
     public boolean isBomb() {
@@ -29,7 +29,7 @@ public class Tile {
         isOpen = open;
     }
 
-    public int getBombsAround() {
+    public String getBombsAround() {
         return bombsAround;
     }
 
@@ -37,7 +37,7 @@ public class Tile {
         return isFlagged;
     }
 
-    public void setBombsAround(int bombsAround) {
+    public void setBombsAround(String bombsAround) {
         this.bombsAround = bombsAround;
     }
 

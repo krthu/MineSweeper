@@ -59,7 +59,7 @@ public class Board {
 
     public void addNumberOfBombsAround() {
         for (int i = 0; i < board.length; i++) {
-            board[i].setBombsAround(checkForBombsAround(i));
+            board[i].setBombsAround(String.valueOf(checkForBombsAround(i)));
         }
     }
 
@@ -144,7 +144,7 @@ public class Board {
             return 0;
         }
         board[index].setOpen(true);
-        if(board[index].getBombsAround() == 0){
+        if(board[index].getBombsAround().equals("0")){
             openTilesAround(index);
         }
         return 1;
@@ -153,7 +153,7 @@ public class Board {
     public void openTilesAround(int index){
        ArrayList<Integer> indexOfSurroundingTiles = getIndexOfSurroundingTiles(index);
         for (int indexOfTileAround: indexOfSurroundingTiles) {
-            if(!board[indexOfTileAround].isOpen() && board[indexOfTileAround].getBombsAround() == 0){
+            if(!board[indexOfTileAround].isOpen() && board[indexOfTileAround].getBombsAround().equals("0")){
                 board[indexOfTileAround].setOpen(true);
                 openTilesAround(indexOfTileAround);
             } else if (!board[indexOfTileAround].isOpen()) {
@@ -220,7 +220,7 @@ public class Board {
 
     }
 
-    public String getNumberOfBombsAsString(int numberOfBombs) {
+    public String getNumberOfBombsAsString(String numberOfBombs) {
         final String RED = "\u001B[31m";
         final String RESET = "\u001B[0m";
         final String GREEN = "\u001B[32m";
@@ -228,32 +228,37 @@ public class Board {
         final String BLUE = "\u001B[34m";
         final String PURPLE = "\u001B[35m";
         final String CYAN = "\u001B[36m";
+        final String BLACK = "\u001B[30m";
 
 
         switch (numberOfBombs) {
-            case 0:
+            case "0":
                 return "|   ";
 
-            case 1:
+            case "1":
                 return "| "+ GREEN + numberOfBombs +RESET +" ";
 
-            case 2:
+            case "2":
                 return "| "+ YELLOW + numberOfBombs +RESET +" ";
 
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
+            case "3":
+            case "4":
+            case "5":
+            case "6":
+            case "7":
+            case "8":
 
                 return "| "+ RED + numberOfBombs +RESET +" ";
 
-            case 9:
-                return "| "+ RED +"B" +RESET +" ";
+            case "9":
+                return "| " + BLACK + "B" + RESET + " ";
+            case (RED + "B" + RESET):
+                return "| " + numberOfBombs +" ";
+
 
         }
         return "";
+
     }
 
     public String drawDivider(int width) {
