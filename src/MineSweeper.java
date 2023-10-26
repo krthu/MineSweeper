@@ -230,17 +230,14 @@ public class MineSweeper {
 
     }
 
-    public boolean createStatsFile(){
+    public void createStatsFile(){
         try {
             File myObj = new File("stats.txt");
             myObj.createNewFile();
-            saveStatsToFile();
 
-            return true;
         } catch (IOException e){
             System.out.println("Error creating file");
             e.printStackTrace();
-            return false;
         }
     }
     public String saveStatsToFile(){
@@ -261,11 +258,10 @@ public class MineSweeper {
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
                 readStatsFromLine(line);
-
             }
             reader.close();
         }catch (FileNotFoundException e){
-            System.out.println("File not found.");
+            createStatsFile();
         }
     }
 
@@ -273,9 +269,5 @@ public class MineSweeper {
         String[] statsArray = line.split(",");
         win = Integer.parseInt(statsArray[0]);
         gamesPlayed = Integer.parseInt((statsArray[1]));
-
     }
-
-
-
 }
