@@ -4,6 +4,7 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         MineSweeper game = new MineSweeper();
+        game.readStatsFile();
         String meny = "";
         while (!meny.equals("4")){
             System.out.println("""
@@ -22,6 +23,7 @@ public class Main {
             }
             else if (meny.equals("3")){
                 game.stats();
+                game.createStatsFile();
             }
             else if (meny.equals("4")){
                 System.out.println("Game Ended");

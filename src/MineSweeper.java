@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class MineSweeper {
@@ -225,6 +230,51 @@ public class MineSweeper {
 
     }
 
+    public boolean createStatsFile(){
+        try {
+            File myObj = new File("stats.txt");
+            myObj.createNewFile();
+            saveStatsToFile();
+
+            return true;
+        } catch (IOException e){
+            System.out.println("Error creating file");
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public String saveStatsToFile(){
+        try{
+            FileWriter writer = new FileWriter("stats.txt");
+            writer.write(win + "," + gamesPlayed);
+            writer.close();
+        } catch (IOException e){
+            System.out.println("Error saving stats!");
+        }
+        return "Stats saved.";
+    }
+
+    public void readStatsFile(){
+        try {
+            File statsFile = new File("stats.txt");
+            Scanner reader = new Scanner(statsFile);
+            while (reader.hasNextLine()) {
+                String line = reader.nextLine();
+                readStatsFromLine(line);
+
+            }
+            reader.close();
+        }catch (FileNotFoundException e){
+            System.out.println("File not found.");
+        }
+    }
+
+    public void readStatsFromLine(String line){
+        String[] statsArray = line.split(",");
+        win = Integer.parseInt(statsArray[0]);
+        gamesPlayed = Integer.parseInt((statsArray[1]));
+
+    }
 
 
 
