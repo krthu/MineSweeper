@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -6,7 +7,7 @@ public class Main {
         MineSweeper game = new MineSweeper();
         game.readStatsFile();
         String meny = "";
-        while (!meny.equals("5")){
+        while (!meny.equals("5")) {
             System.out.println("""
                                
                     ---- MAIN MENU ----       
@@ -17,19 +18,15 @@ public class Main {
                     5.Quit
                     """);
             meny = sc.nextLine();
-            if (meny.equals("1")){
+            if (meny.equals("1")) {
                 game.gameLoop();
-            }
-            else if (meny.equals("2")){
+            } else if (meny.equals("2")) {
                 game.settings();
-            }
-            else if (meny.equals("3")){
+            } else if (meny.equals("3")) {
                 game.stats();
-            }
-            else if (meny.equals("4")){
+            } else if (meny.equals("4")) {
                 game.rules();
-            }
-            else if (meny.equals("5")){
+            } else if (meny.equals("5")) {
                 System.out.println("Game Ended");
             }
         }

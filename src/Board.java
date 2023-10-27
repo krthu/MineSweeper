@@ -15,13 +15,13 @@ public class Board {
         this.totalNumberOfBombs = numberOfBombs;
 
     }
-  
 
-    public Board(int width, int height){
-      this.width = width;
-      this.height = height;
-      this.board = new Tile[width*height];
-  }
+
+    public Board(int width, int height) {
+        this.width = width;
+        this.height = height;
+        this.board = new Tile[width * height];
+    }
 
     public Tile[] getBoard() {
         return board;
@@ -31,14 +31,16 @@ public class Board {
         return width;
     }
 
-    public int getTotalNumberOfBombs() {return totalNumberOfBombs;}
+    public int getTotalNumberOfBombs() {
+        return totalNumberOfBombs;
+    }
 
     public int getHeight() {
         return height;
     }
 
-    public int addBombs(int numberOfBombs){
-        totalNumberOfBombs=numberOfBombs;
+    public int addBombs(int numberOfBombs) {
+        totalNumberOfBombs = numberOfBombs;
         Random randomBomb = new Random();
         for (int i = 0; i < numberOfBombs; i++) {
             int position = randomBomb.nextInt(board.length);
@@ -76,6 +78,7 @@ public class Board {
         }
         return numberOfBombs;
     }
+
     public boolean checkWinConditions() {
         for (int i = 0; i < board.length; i++) {
             if (!board[i].isBomb() && !board[i].isOpen()) {
@@ -103,7 +106,7 @@ public class Board {
             indexOfSurroundingTiles.add(index - width);
         }
         // Check if tile below
-        if (row < height -1 ){
+        if (row < height - 1) {
             indexOfSurroundingTiles.add(index + width);
 
         }
@@ -128,7 +131,7 @@ public class Board {
             indexOfSurroundingTiles.add(index + width - 1);
         }
         // Check for tile below right
-        if (row < height -1 && column < width -1){
+        if (row < height - 1 && column < width - 1) {
 
             indexOfSurroundingTiles.add(index + width + 1);
         }
@@ -136,24 +139,24 @@ public class Board {
         return indexOfSurroundingTiles;
     }
 
-    public int openTile(int index){
-        if (board[index].isBomb()){
+    public int openTile(int index) {
+        if (board[index].isBomb()) {
             board[index].setOpen(true);
             return -1;
         } else if (board[index].isOpen()) {
             return 0;
         }
         board[index].setOpen(true);
-        if(board[index].getBombsAround().equals("0")){
+        if (board[index].getBombsAround().equals("0")) {
             openTilesAround(index);
         }
         return 1;
     }
 
-    public void openTilesAround(int index){
-       ArrayList<Integer> indexOfSurroundingTiles = getIndexOfSurroundingTiles(index);
-        for (int indexOfTileAround: indexOfSurroundingTiles) {
-            if(!board[indexOfTileAround].isOpen() && board[indexOfTileAround].getBombsAround().equals("0")){
+    public void openTilesAround(int index) {
+        ArrayList<Integer> indexOfSurroundingTiles = getIndexOfSurroundingTiles(index);
+        for (int indexOfTileAround : indexOfSurroundingTiles) {
+            if (!board[indexOfTileAround].isOpen() && board[indexOfTileAround].getBombsAround().equals("0")) {
                 board[indexOfTileAround].setOpen(true);
                 openTilesAround(indexOfTileAround);
             } else if (!board[indexOfTileAround].isOpen()) {
@@ -162,15 +165,15 @@ public class Board {
         }
     }
 
-    public boolean toggleFlag(int index){
-        if (board[index].isOpen()){
+    public boolean toggleFlag(int index) {
+        if (board[index].isOpen()) {
             return false;
         }
         board[index].toggleFlag();
         return true;
     }
 
-    public boolean isTileFlagged(int index){
+    public boolean isTileFlagged(int index) {
         return board[index].isFlagged();
     }
 
@@ -205,7 +208,7 @@ public class Board {
                 builder.append(changeRowAndAddLetter);
             }
             String numberOfBombs = getNumberOfBombsAsString(board[i].getBombsAround());
-            String tileHiddenOrFlagged = board[i].isFlagged() ? "| "+ CYAN + "F" + RESET +" ": "| X ";
+            String tileHiddenOrFlagged = board[i].isFlagged() ? "| " + CYAN + "F" + RESET + " " : "| X ";
             builder.append(board[i].isOpen() ? numberOfBombs : tileHiddenOrFlagged);
             if (i % width == width - 1) {
                 builder.append("|");
@@ -213,10 +216,10 @@ public class Board {
             }
         }
 
-      builder.append("\n");
-      builder.append(drawLine(width));
-      builder.append("\n   Bombs: " + totalNumberOfBombs);
-      return builder.toString();
+        builder.append("\n");
+        builder.append(drawLine(width));
+        builder.append("\n   Bombs: " + totalNumberOfBombs);
+        return builder.toString();
 
     }
 
@@ -236,10 +239,10 @@ public class Board {
                 return "|   ";
 
             case "1":
-                return "| "+ GREEN + numberOfBombs +RESET +" ";
+                return "| " + GREEN + numberOfBombs + RESET + " ";
 
             case "2":
-                return "| "+ YELLOW + numberOfBombs +RESET +" ";
+                return "| " + YELLOW + numberOfBombs + RESET + " ";
 
             case "3":
             case "4":
@@ -248,12 +251,12 @@ public class Board {
             case "7":
             case "8":
 
-                return "| "+ RED + numberOfBombs +RESET +" ";
+                return "| " + RED + numberOfBombs + RESET + " ";
 
             case "9":
                 return "| " + BLACK + "B" + RESET + " ";
             case (RED + "B" + RESET):
-                return "| " + numberOfBombs +" ";
+                return "| " + numberOfBombs + " ";
 
 
         }

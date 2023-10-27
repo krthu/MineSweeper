@@ -7,7 +7,7 @@ public class Tile {
 
     private String bombsAround;
 
-    public Tile(){
+    public Tile() {
         this.isOpen = false;
         this.isFlagged = false;
         this.bombsAround = "0";
@@ -41,12 +41,12 @@ public class Tile {
         this.bombsAround = bombsAround;
     }
 
-    public void toggleFlag(){
+    public void toggleFlag() {
         isFlagged = !isFlagged;
     }
 
 
-    public String toString(){
+    public String toString() {
         return "isBomb: " + isBomb + " isOpen " + isOpen + " bombsAround " + bombsAround;
     }
 
