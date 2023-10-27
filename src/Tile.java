@@ -1,10 +1,7 @@
 public class Tile {
     private boolean isBomb;
-
     private boolean isOpen;
-
     private boolean isFlagged;
-
     private String bombsAround;
 
     public Tile() {
@@ -45,11 +42,9 @@ public class Tile {
         isFlagged = !isFlagged;
     }
 
-
     public String toString() {
         return "isBomb: " + isBomb + " isOpen " + isOpen + " bombsAround " + bombsAround;
     }
-
 }
 
 

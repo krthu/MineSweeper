@@ -2,20 +2,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class MineSweeper {
-
     Scanner sc = new Scanner(System.in);
     private Board board;
     private int boardHeight;
     private int boardWidth;
     private int win;
     private int gamesPlayed;
-
     private int numberOfBombs;
-
     private final int MIN_BOARD_WIDTH = 5;
     private final int MAX_BOARD_WIDTH = 26;
     private final int MIN_BOARD_HEIGHT = 5;
@@ -23,7 +19,6 @@ public class MineSweeper {
     final String RED = "\u001B[31m";
     final String GREEN = "\u001B[32m";
     final String RESET = "\u001B[0m";
-
     private Mode inputMode = Mode.OPEN;
 
     private enum Mode {
@@ -47,9 +42,7 @@ public class MineSweeper {
         boardWidth = 7;
         boardHeight = 7;
         numberOfBombs = 5;
-
     }
-
 
     public void gameLoop() {
         createBoard(boardWidth, boardHeight, numberOfBombs);
@@ -101,7 +94,6 @@ public class MineSweeper {
                     System.out.println("Already open.");
                 }
                 case 1 -> {
-
                 }
             }
         }
@@ -165,7 +157,6 @@ public class MineSweeper {
                 return -1;
             }
             return (index);
-
         } catch (Exception e) {
             return -1;
         }
@@ -190,7 +181,7 @@ public class MineSweeper {
         System.out.println("---- STATS ----");
         System.out.println("Wins: " + getWin());
         System.out.println("Games played: " + getGamesPlayed());
-        System.out.println("Press Enter to go back");
+        System.out.println("(Press Enter to go back)");
         sc.nextLine();
     }
 
@@ -211,7 +202,6 @@ public class MineSweeper {
             } else if (settingsMeny.equals("3")) {
             }
         }
-
     }
 
 
@@ -226,7 +216,6 @@ public class MineSweeper {
                 } else {
                     System.out.println("Has to be between " + min + "-" + max);
                 }
-
             } catch (Exception e) {
                 System.out.println("Invalid input.");
                 sc.nextLine();
