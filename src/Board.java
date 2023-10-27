@@ -2,20 +2,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Board {
-
     private Tile[] board;
     private int width;
     private int height;
     private int totalNumberOfBombs;
-
-    public Board(int width, int height, int numberOfBombs) {
-        this.width = width;
-        this.height = height;
-        this.board = new Tile[width * height];
-        this.totalNumberOfBombs = numberOfBombs;
-
-    }
-
 
     public Board(int width, int height) {
         this.width = width;
@@ -29,10 +19,6 @@ public class Board {
 
     public int getWidth() {
         return width;
-    }
-
-    public int getTotalNumberOfBombs() {
-        return totalNumberOfBombs;
     }
 
     public int getHeight() {
@@ -96,7 +82,6 @@ public class Board {
         }
     }
 
-
     public ArrayList<Integer> getIndexOfSurroundingTiles(int index) {
         ArrayList<Integer> indexOfSurroundingTiles = new ArrayList<>();
         int row = index / width;
@@ -132,10 +117,8 @@ public class Board {
         }
         // Check for tile below right
         if (row < height - 1 && column < width - 1) {
-
             indexOfSurroundingTiles.add(index + width + 1);
         }
-
         return indexOfSurroundingTiles;
     }
 
@@ -181,7 +164,6 @@ public class Board {
     public String toString() {
         final String CYAN = "\u001B[36m";
         final String RESET = "\u001B[0m";
-
         StringBuilder builder = new StringBuilder();
         builder.append("   ");
         for (int i = 0; i < width; i++) {
@@ -190,7 +172,6 @@ public class Board {
                 number = "  " + (i + 1) + " ";
             } else {
                 number = " " + (i + 1) + " ";
-
             }
             builder.append(number);
         }
@@ -202,7 +183,6 @@ public class Board {
                     builder.append("\n   ");
                     builder.append(drawDivider(width));
                 }
-
                 char letterForColumn = (char) ('A' + i / width);
                 String changeRowAndAddLetter = "\n " + letterForColumn + " ";
                 builder.append(changeRowAndAddLetter);
@@ -212,7 +192,6 @@ public class Board {
             builder.append(board[i].isOpen() ? numberOfBombs : tileHiddenOrFlagged);
             if (i % width == width - 1) {
                 builder.append("|");
-
             }
         }
 
@@ -228,40 +207,29 @@ public class Board {
         final String RESET = "\u001B[0m";
         final String GREEN = "\u001B[32m";
         final String YELLOW = "\u001B[33m";
-        final String BLUE = "\u001B[34m";
-        final String PURPLE = "\u001B[35m";
-        final String CYAN = "\u001B[36m";
         final String BLACK = "\u001B[30m";
 
 
         switch (numberOfBombs) {
             case "0":
                 return "|   ";
-
             case "1":
                 return "| " + GREEN + numberOfBombs + RESET + " ";
-
             case "2":
                 return "| " + YELLOW + numberOfBombs + RESET + " ";
-
             case "3":
             case "4":
             case "5":
             case "6":
             case "7":
             case "8":
-
                 return "| " + RED + numberOfBombs + RESET + " ";
-
             case "9":
                 return "| " + BLACK + "B" + RESET + " ";
             case (RED + "B" + RESET):
                 return "| " + numberOfBombs + " ";
-
-
         }
         return "";
-
     }
 
     public String drawDivider(int width) {
@@ -286,9 +254,6 @@ public class Board {
                 builder.append("----");
             }
         }
-
         return builder.toString();
-
     }
-
 }
