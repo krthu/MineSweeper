@@ -6,13 +6,15 @@ public class Main {
         MineSweeper game = new MineSweeper();
         game.readStatsFile();
         String meny = "";
-        while (!meny.equals("4")){
+        while (!meny.equals("5")){
             System.out.println("""
+                               
                     ---- MAIN MENU ----       
                     1.play Mine Sweeper
                     2.Settings
                     3.Show Stats
-                    4.Quit
+                    4.Rules
+                    5.Quit
                     """);
             meny = sc.nextLine();
             if (meny.equals("1")){
@@ -23,10 +25,11 @@ public class Main {
             }
             else if (meny.equals("3")){
                 game.stats();
-
             }
             else if (meny.equals("4")){
-                System.out.println("Stats saved.");
+                game.rules();
+            }
+            else if (meny.equals("5")){
                 System.out.println("Game Ended");
             }
         }
