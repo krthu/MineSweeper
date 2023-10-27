@@ -15,6 +15,9 @@ public class MineSweeper {
     private final int MAX_BOARD_WIDTH = 26;
     private final int MIN_BOARD_HEIGHT = 5;
     private final int MAX_BOARD_HEIGHT = 26;
+    final String RED = "\u001B[31m";
+    final String GREEN = "\u001B[32m";
+    final String RESET = "\u001B[0m";
 
     private Mode inputMode = Mode.OPEN;
 
@@ -44,8 +47,6 @@ public class MineSweeper {
 
 
         public void gameLoop(){
-            final String RED = "\u001B[31m";
-            final String RESET = "\u001B[0m";
         createBoard(boardWidth, boardHeight, numberOfBombs);
         boolean win = false;
         boolean bomb = false;
@@ -60,43 +61,45 @@ public class MineSweeper {
                  continue;
              }
              if (inputMode == Mode.OPEN){
-                 if (board.isTileFlagged(index)){
-                     System.out.println("Tile is flagged! Remove flag to open.");
-                 }else{
-                    switch (board.openTile(index)){
-                        case -1 -> {
-                            bomb = true;
-                            board.getBoard()[index].setBombsAround(RED + "B" + RESET);
-
-                            board.revealAllBombs();
-
-                        }
-                        case 0 ->{
-                            System.out.println("Already open.");
-                        }
-                        case 1 ->{
-                            
-                        }
-                    }
-                }
+                bomb = openTile(index);
              }else {
                  if (!board.toggleFlag(index)){
                      System.out.println("Already open.");
                  }
              }
              win=board.checkWinConditions();
-
         }
         System.out.println(board);
         if (win){
-            System.out.println("\u001B[32mCongratulations only bombs left!\u001B[0m");            
+            System.out.println(GREEN + "Congratulations only bombs left!" + RESET);
             addwin();
         } else {
-            System.out.println("You hit a Bomb!");
+            System.out.println(RED + "You hit a Bomb!" + RESET);
         }
         gamesPlayed();
+      }
 
+      public boolean openTile(int index){
+        boolean bomb = false;
+          if (board.isTileFlagged(index)){
+              System.out.println("Tile is flagged! Remove flag to open.");
+          }else{
+              switch (board.openTile(index)){
+                  case -1 -> {
+                      bomb = true;
+                      board.getBoard()[index].setBombsAround(RED + "B" + RESET);
+                      board.revealAllBombs();
+                      return bomb;
+                  }
+                  case 0 ->{
+                      System.out.println("Already open.");
+                  }
+                  case 1 ->{
 
+                  }
+              }
+          }
+          return bomb;
       }
 
     public void toggleMode(){
@@ -226,12 +229,14 @@ public class MineSweeper {
     public void rules() {
         System.out.println("""
                            The goal of the game is to clear the game board without revealing any mines hidden under the tiles.
-                           Numbers that are revealed indicate the number of bombs around them. 
+                           Numbers that are revealed indicate the number of bombs around them.
                            The game is won when all tiles without mines have been revealed. 
                            You have the option to mark a tile with a flag to indicate a suspected bomb location.
+                           To toggle between flag tile and open tile type [MODE] instead of coordinate. 
                            You can only open the tile after removing the flag, in the same way you placed it.
                            Good luck !!!
-                           """);
+                           (Press Enter to go back)""");
+        sc.nextLine();
     }
 
 
