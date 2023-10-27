@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class MineSweeper {
@@ -77,6 +82,7 @@ public class MineSweeper {
             System.out.println(RED + "You hit a Bomb!" + RESET);
         }
         gamesPlayed();
+        saveStatsToFile();
       }
 
       public boolean openTile(int index){
@@ -239,7 +245,43 @@ public class MineSweeper {
         sc.nextLine();
     }
 
+    public void createStatsFile(){
+        try {
+            File myObj = new File("stats.txt");
+            myObj.createNewFile();
 
+        } catch (IOException e){
+            System.out.println("Error creating file");
+            e.printStackTrace();
+        }
+    }
+    public void saveStatsToFile(){
+        try{
+            FileWriter writer = new FileWriter("stats.txt");
+            writer.write(win + "," + gamesPlayed);
+            writer.close();
+        } catch (IOException e){
+            System.out.println("Error saving stats!");
+        }
+    }
 
+    public void readStatsFile(){
+        try {
+            File statsFile = new File("stats.txt");
+            Scanner reader = new Scanner(statsFile);
+            while (reader.hasNextLine()) {
+                String line = reader.nextLine();
+                readStatsFromLine(line);
+            }
+            reader.close();
+        }catch (FileNotFoundException e){
+            createStatsFile();
+        }
+    }
 
+    public void readStatsFromLine(String line){
+        String[] statsArray = line.split(",");
+        win = Integer.parseInt(statsArray[0]);
+        gamesPlayed = Integer.parseInt((statsArray[1]));
+    }
 }

@@ -4,6 +4,7 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         MineSweeper game = new MineSweeper();
+        game.readStatsFile();
         String meny = "";
         while (!meny.equals("5")){
             System.out.println("""
