@@ -100,7 +100,7 @@ public class MineSweeper {
             System.out.println("You hit a Bomb!");
         }
         gamesPlayed();
-
+        saveStatsToFile();
 
       }
 
@@ -248,9 +248,6 @@ public class MineSweeper {
         } catch (IOException e){
             System.out.println("Error saving stats!");
         }
-    }
-    public void rules(){
-
     }
 
     public void readStatsFile(){

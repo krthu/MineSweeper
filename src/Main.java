@@ -26,7 +26,6 @@ public class Main {
 
             }
             else if (meny.equals("4")){
-                game.saveStatsToFile();
                 System.out.println("Stats saved.");
                 System.out.println("Game Ended");
             }
