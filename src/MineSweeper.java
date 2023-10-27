@@ -221,8 +221,17 @@ public class MineSweeper {
                 sc.nextLine();
             }
         }
+    }
 
-
+    public void rules() {
+        System.out.println("""
+                           The goal of the game is to clear the game board without revealing any mines hidden under the tiles.
+                           Numbers that are revealed indicate the number of bombs around them. 
+                           The game is won when all tiles without mines have been revealed. 
+                           You have the option to mark a tile with a flag to indicate a suspected bomb location.
+                           You can only open the tile after removing the flag, in the same way you placed it.
+                           Good luck !!!
+                           """);
     }
 
 
