@@ -44,6 +44,8 @@ public class MineSweeper {
 
 
         public void gameLoop(){
+            final String RED = "\u001B[31m";
+            final String RESET = "\u001B[0m";
         createBoard(boardWidth, boardHeight, numberOfBombs);
         boolean win = false;
         boolean bomb = false;
@@ -64,6 +66,7 @@ public class MineSweeper {
                     switch (board.openTile(index)){
                         case -1 -> {
                             bomb = true;
+                            board.getBoard()[index].setBombsAround(RED + "B" + RESET);
 
                             board.revealAllBombs();
 
@@ -172,6 +175,7 @@ public class MineSweeper {
         this.gamesPlayed++;
     }
     public void stats(){
+        System.out.println("---- STATS ----");
         System.out.println("Wins: " + getWin());
         System.out.println("Games played: " + getGamesPlayed());
         System.out.println("Press Enter to go back");
@@ -181,19 +185,19 @@ public class MineSweeper {
         String settingsMeny = "";
         while (!settingsMeny.equals("3")){
             System.out.println("""
-                    Settings
-                    1.Set size of board
-                    2.Set numbers of bombs
+                    ---- SETTINGS ----
+                    1.Set boardsize:%sX%s 
+                    2.Set bombs:%s  
                     3.Go back to menu
-                    """);
+                    """.formatted(boardWidth,boardHeight,numberOfBombs));
             settingsMeny = sc.nextLine();
             if (settingsMeny.equals("1")){
                 setSizeOfBoard();
             }
-            if (settingsMeny.equals("2")){
+            else if (settingsMeny.equals("2")){
                 setBombs();
             }
-            if (settingsMeny.equals("3")) {
+            else if (settingsMeny.equals("3")) {
             }
         }
 

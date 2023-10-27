@@ -7,6 +7,8 @@ public class Main {
         String meny = "";
         while (!meny.equals("5")){
             System.out.println("""
+                               
+                    ---- MAIN MENU ----       
                     1.play Mine Sweeper
                     2.Settings
                     3.Show Stats
@@ -17,17 +19,16 @@ public class Main {
             if (meny.equals("1")){
                 game.gameLoop();
             }
-            if (meny.equals("2")){
+            else if (meny.equals("2")){
                 game.settings();
             }
-            if (meny.equals("3")){
+            else if (meny.equals("3")){
                 game.stats();
-
             }
-            if (meny.equals("4")){
+            else if (meny.equals("4")){
                 game.rules();
             }
-            if (meny.equals("5")){
+            else if (meny.equals("5")){
                 System.out.println("Game Ended");
             }
         }
