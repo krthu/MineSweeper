@@ -240,7 +240,7 @@ public class MineSweeper {
             e.printStackTrace();
         }
     }
-    public String saveStatsToFile(){
+    public void saveStatsToFile(){
         try{
             FileWriter writer = new FileWriter("stats.txt");
             writer.write(win + "," + gamesPlayed);
@@ -248,7 +248,9 @@ public class MineSweeper {
         } catch (IOException e){
             System.out.println("Error saving stats!");
         }
-        return "Stats saved.";
+    }
+    public void rules(){
+
     }
 
     public void readStatsFile(){
