@@ -5,10 +5,19 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         MineSweeper game = new MineSweeper();
         game.readStatsFile();
+        System.out.println("""
+                      __  __ _            ____                                  \s
+                     |  \\/  (_)_ __   ___/ ___|_      _____  ___ _ __   ___ _ __\s
+                     | |\\/| | | '_ \\ / _ \\___ \\ \\  \\ / / _ \\/ _ \\ '_ \\ / _ \\ '__|
+                     | |  | | | | | |  __/___) \\ V  V /  __/  __/ |_) |  __/ |  \s
+                     |_|  |_|_|_| |_|\\___|____/ \\_/\\_/ \\___|\\___| .__/ \\___|_|  \s
+                                                                |_|             \s
+                    Welcome to the MineSweeper!    
+                """);
         String meny = "";
         while (!meny.equals("5")) {
             System.out.println("""
-                               
+
                     ---- MAIN MENU ----       
                     1.play Mine Sweeper
                     2.Settings
