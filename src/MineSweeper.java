@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 public class MineSweeper {
     Scanner sc = new Scanner(System.in);
+    private double timeStart;
+    private double timeEnds;
+    private double fastestTime;
     private Board board;
     private int boardHeight;
     private int boardWidth;
@@ -48,6 +51,7 @@ public class MineSweeper {
         createBoard(boardWidth, boardHeight, numberOfBombs);
         boolean win = false;
         boolean bomb = false;
+        timeStart = System.currentTimeMillis();
         while (!win && !bomb) {
             System.out.println(board);
             int index = getUserInput();
@@ -71,11 +75,18 @@ public class MineSweeper {
         if (win) {
             System.out.println(GREEN + "Congratulations only bombs left!" + RESET);
             addwin();
+            timeEnds = System.currentTimeMillis();
+            fastestTime = calculateFastestTime();
         } else {
             System.out.println(RED + "You hit a Bomb!" + RESET);
+            timeEnds = System.currentTimeMillis();
         }
         gamesPlayed();
         saveStatsToFile();
+    }
+    public double calculateFastestTime() {
+        double timeInSeconds = (timeEnds - timeStart) / 1000.0;
+        return timeInSeconds;
     }
 
     public boolean openTile(int index) {
@@ -181,6 +192,13 @@ public class MineSweeper {
         System.out.println("---- STATS ----");
         System.out.println("Wins: " + getWin());
         System.out.println("Games played: " + getGamesPlayed());
+        int minutes = (int) (fastestTime / 60);
+        int seconds = (int) (fastestTime % 60);
+        if (minutes > 0) {
+            System.out.println("Fastest time: " + minutes + " minutes and " + seconds + " seconds");
+        } else {
+            System.out.println("Fastest time: " + seconds + " seconds");
+        }
         System.out.println("(Press Enter to go back)");
         sc.nextLine();
     }
@@ -250,7 +268,7 @@ public class MineSweeper {
     public void saveStatsToFile() {
         try {
             FileWriter writer = new FileWriter("stats.txt");
-            writer.write(win + "," + gamesPlayed);
+            writer.write(win + "," + gamesPlayed + "," + fastestTime);
             writer.close();
         } catch (IOException e) {
             System.out.println("Error saving stats!");
@@ -275,5 +293,6 @@ public class MineSweeper {
         String[] statsArray = line.split(",");
         win = Integer.parseInt(statsArray[0]);
         gamesPlayed = Integer.parseInt((statsArray[1]));
+        fastestTime = Double.parseDouble(statsArray[2]);
     }
 }
