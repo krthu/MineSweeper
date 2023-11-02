@@ -8,7 +8,8 @@ public class MineSweeper {
     Scanner sc = new Scanner(System.in);
     private double timeStart;
     private double timeEnds;
-    private double fastestTime;
+    private double fastestTime = Double.MAX_VALUE;
+    private double latestTime = -1;
     private Board board;
     private int boardHeight;
     private int boardWidth;
@@ -76,7 +77,7 @@ public class MineSweeper {
             System.out.println(GREEN + "Congratulations only bombs left!" + RESET);
             addwin();
             timeEnds = System.currentTimeMillis();
-            fastestTime = calculateFastestTime();
+           latestTime = calculateLatestTime();
         } else {
             System.out.println(RED + "You hit a Bomb!" + RESET);
             timeEnds = System.currentTimeMillis();
@@ -84,7 +85,7 @@ public class MineSweeper {
         gamesPlayed();
         saveStatsToFile();
     }
-    public double calculateFastestTime() {
+    public double calculateLatestTime() {
         double timeInSeconds = (timeEnds - timeStart) / 1000.0;
         return timeInSeconds;
     }
@@ -192,6 +193,9 @@ public class MineSweeper {
         System.out.println("---- STATS ----");
         System.out.println("Wins: " + getWin());
         System.out.println("Games played: " + getGamesPlayed());
+        if (latestTime != -1 && (latestTime < fastestTime || fastestTime == -1)) {
+            fastestTime = latestTime;
+        }
         int minutes = (int) (fastestTime / 60);
         int seconds = (int) (fastestTime % 60);
         if (minutes > 0) {
@@ -201,6 +205,7 @@ public class MineSweeper {
         }
         System.out.println("(Press Enter to go back)");
         sc.nextLine();
+        saveStatsToFile();
     }
 
     public void settings() {
